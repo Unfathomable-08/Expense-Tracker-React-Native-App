@@ -1,20 +1,25 @@
-import { Platform, StyleSheet, View, Dimensions, StatusBar, Text, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { colors, spacingX, spacingY } from '@/constants/theme';
 import ScreenWrapper from '@/components/ScreenWrapper';
 import { verticalScale } from '@/utils/styling';
+import Animated, { FadeIn, FadeInDown } from "react-native-reanimated";
 import Typo from '@/components/Typo';
+import Button from '@/components/Button';
+import { useRouter } from 'expo-router';
 
 const Welcome = () => {
+    const router = useRouter()
 
     return (
         <ScreenWrapper>
             <View style={styles.container}>
                 <View>
-                    <TouchableOpacity style={styles.loginButton}>
+                    <TouchableOpacity style={styles.loginButton} onPress={() => router.push("/(auth)/login")}>
                         <Typo fontWeight={500}>Sign in</Typo>
                     </TouchableOpacity>
 
-                    <Image
+                    <Animated.Image
+                        entering={FadeIn.duration(1000)}
                         source={require("../../assets/images/welcome.png")}
                         style={styles.welcomeImage}
                         resizeMode="contain"
@@ -23,18 +28,33 @@ const Welcome = () => {
 
                 {/* footer */}
                 <View style={styles.footer}>
-                    <View>
+                    <Animated.View
+                        entering={FadeInDown.duration(1000).springify().damping(12)}
+                        style={{ alignItems: "center" }}
+                    >
                         <View style={{ alignItems: "center" }}>
                             <Typo fontWeight={"800"} size={30}>Always take control</Typo>
                         </View>
                         <View style={{ alignItems: "center" }}>
                             <Typo fontWeight={"800"} size={30}>of your finances</Typo>
                         </View>
-                    </View>
-                    <View style={{ alignItems: "center", gap: 2 }}>
+                    </Animated.View>
+                    <Animated.View
+                        entering={FadeInDown.delay(100).duration(1000).springify().damping(12)}
+                        style={{ alignItems: "center", gap: 2 }}
+                    >
                         <Typo>Finances must be arranged to set a better</Typo>
                         <Typo>lifestyle in future.</Typo>
-                    </View>
+                    </Animated.View>
+
+                    <Animated.View
+                        entering={FadeInDown.delay(200).duration(1000).springify().damping(12)}
+                        style={styles.buttonContainer}
+                    >
+                        <Button onPress={() => router.push("/(auth)/register")}>
+                            <Typo size={22} color={colors.neutral900}>Get Started</Typo>
+                        </Button>
+                    </Animated.View>
                 </View>
 
             </View>

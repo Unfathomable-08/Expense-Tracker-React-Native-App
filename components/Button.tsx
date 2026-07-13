@@ -1,4 +1,4 @@
-import { TouchableOpacity, StyleSheet } from 'react-native';
+import { TouchableOpacity, StyleSheet, ActivityIndicator, View } from 'react-native';
 import { colors, radius } from '@/constants/theme';
 import { CustomButtonProps } from '@/types';
 import { verticalScale } from '@/utils/styling';
@@ -9,6 +9,11 @@ const Button = ({
     loading,
     onPress
 }: CustomButtonProps) => {
+    if (loading) return (
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+            <ActivityIndicator color={colors.white} size={24} />
+        </View>
+    );
 
     return (
         <TouchableOpacity style={[style, styles.button]} onPress={onPress}>{children}</TouchableOpacity>
