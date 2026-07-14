@@ -1,8 +1,7 @@
-import { TouchableOpacity, StyleSheet, ActivityIndicator, View } from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 import { colors, radius, spacingX } from '@/constants/theme';
 import { InputProps } from '@/types';
 import { verticalScale } from '@/utils/styling';
-import { TextInput } from 'react-native-gesture-handler';
 
 const Input = (props: InputProps) => {
     return (
@@ -11,9 +10,10 @@ const Input = (props: InputProps) => {
         >
             {props.icon && <View>{props.icon}</View>}
             <TextInput
-                style={[styles.input, props.inputStyle]}
+                {...props}
                 placeholderTextColor={colors.neutral400}
-            // ref={props.inputRef && props.inputRef }
+                style={[styles.input, props.inputStyle]}
+                ref={props.inputRef && props.inputRef }
             ></TextInput>
         </View>
     );
@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         color: colors.white,
-        fontSize: verticalScale(14)
+        fontSize: verticalScale(14),
     }
 })

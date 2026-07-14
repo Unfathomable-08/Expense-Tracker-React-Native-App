@@ -11,7 +11,7 @@ const Button = ({
 }: CustomButtonProps) => {
     if (loading) return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <ActivityIndicator color={colors.white} size={24} />
+            <ActivityIndicator color={colors.primary} size={24} />
         </View>
     );
 
